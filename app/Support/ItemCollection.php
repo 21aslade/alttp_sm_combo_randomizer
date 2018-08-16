@@ -586,38 +586,88 @@ class ItemCollection extends Collection {
 
 	public function canAccessNorfairPortal()
 	{
-		return $this->canFly() || ($this->canLiftRocks() && $this->has('Lamp'));
+		switch ($this->world->getLogic())
+		{
+			case "NoMajorGlitches":
+				return $this->canFly() || ($this->canLiftRocks() && $this->has('Lamp'));
+			case "OverworldGlitches":
+			default:
+				return $this->canFly() || ($this->canLiftRocks() && $this->has('Lamp')) || $this->has('PegasusBoots');
+		}
 	}
 
 	public function canAccessLowerNorfairPortal()
 	{
-		return $this->canFly() && $this->canLiftDarkRocks();		
+		switch ($this->world->getLogic())
+		{
+			case "NoMajorGlitches":
+				return $this->canFly() && $this->canLiftDarkRocks();
+			case "OverworldGlitches":
+				return ($this->canFly() && ($this->canLiftDarkRocks() || $this->has('PegasusBoots'))
+					|| ($this->has('PegasusBoots') && $this->has('MoonPearl'));
+		}
 	}
 
 	public function canAccessMaridiaPortal()
 	{
+		//TODO: Fix OWG logic to allow for a mirror clip
 		switch($this->world->getSMLogic())
 		{
-			case 'Casual':
-				return $this->has('MoonPearl')
-					&& $this->has('RescueZelda')
-					&& $this->has('Flippers')
-					&& $this->has('Gravity')
-					&& $this->has('Morph')
-					&& ($this->has('DefeatAgahnim')
-						|| ($this->has('Hammer') && $this->canLiftRocks())
-						|| $this->canLiftDarkRocks());
-			case 'Tournament':
-			default:
-				return $this->has('MoonPearl')
-					&& $this->has('RescueZelda')
-					&& $this->has('Flippers')
-					&& ($this->canSpringBallJump() || $this->has('HiJump') || $this->has('Gravity'))
-					&& $this->has('Morph')
-					&& ($this->has('DefeatAgahnim')
-						|| ($this->has('Hammer') && $this->canLiftRocks())
-						|| $this->canLiftDarkRocks());
+			case 'CasualNoMajorGlitches':
+				switch ($this->world->getLogic())
+				{
+					case 'NoMajorGlitches':
+						return $this->has('MoonPearl')
+							&& $this->has('RescueZelda')
+							&& $this->has('Flippers')
+							&& $this->has('Gravity')
+							&& $this->has('Morph')
+							&& ($this->has('DefeatAgahnim')
+								|| ($this->has('Hammer') && $this->canLiftRocks())
+								|| $this->canLiftDarkRocks());
+					case 'OverworldGlitches':
+						return $this->has('MoonPearl')
+							&& $this->has('RescueZelda')
+							&& $this->has('Gravity')
+							&& $this->has('Morph')
+							&& ($this->has('Flippers') 
+							    	&& ($this->has('DefeatAgahnim')
+									|| ($this->has('Hammer') && $this->canLiftRocks())
+									|| $this->canLiftDarkRocks()))
+								|| $this->has('PegasusBoots');
 				}
+			case 'TournamentNoMajorGlitches':
+				switch ($this->world->getLogic())
+				{
+					case 'NoMajorGlitches':
+						return $this->has('MoonPearl')
+							&& $this->has('RescueZelda')
+							&& $this->has('Flippers')
+							&& ($this->canSpringBallJump() || $this->has('HiJump') || $this->has('Gravity'))
+							&& $this->has('Morph')
+							&& ($this->has('DefeatAgahnim')
+								|| ($this->has('Hammer') && $this->canLiftRocks())
+								|| $this->canLiftDarkRocks());
+					case 'OverworldGlitches':
+						return $this->has('MoonPearl')
+							&& $this->has('RescueZelda')
+							&& ($this->canSpringBallJump() || $this->has('HiJump') || $this->has('Gravity'))
+							&& $this->has('Morph')
+							&& ($this->has('Flippers') 
+							    	&& ($this->has('DefeatAgahnim')
+									|| ($this->has('Hammer') && $this->canLiftRocks())
+									|| $this->canLiftDarkRocks()))
+								|| $this->has('PegasusBoots');
+				}
+				return $this->has('MoonPearl')
+							&& $this->has('RescueZelda')
+							&& $this->has('Flippers')
+							&& ($this->canSpringBallJump() || $this->has('HiJump') || $this->has('Gravity'))
+							&& $this->has('Morph')
+							&& ($this->has('DefeatAgahnim')
+								|| ($this->has('Hammer') && $this->canLiftRocks())
+								|| $this->canLiftDarkRocks());
+		}
 	}
 
 	public function canDefeatBotwoon()
