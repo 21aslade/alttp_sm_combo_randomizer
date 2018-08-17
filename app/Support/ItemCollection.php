@@ -613,7 +613,7 @@ class ItemCollection extends Collection {
 		//TODO: Fix OWG logic to allow for a mirror clip
 		switch($this->world->getSMLogic())
 		{
-			case 'CasualNoMajorGlitches':
+			case 'Casual':
 				switch ($this->world->getLogic())
 				{
 					case 'NoMajorGlitches':
@@ -636,7 +636,7 @@ class ItemCollection extends Collection {
 									|| $this->canLiftDarkRocks()))
 								|| $this->has('PegasusBoots');
 				}
-			case 'TournamentNoMajorGlitches':
+			case 'Tournament':
 				switch ($this->world->getLogic())
 				{
 					case 'NoMajorGlitches':
