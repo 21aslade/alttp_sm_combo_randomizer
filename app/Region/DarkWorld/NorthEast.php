@@ -293,7 +293,8 @@ class NorthEast extends Region {
 				&& ($items->has('DefeatAgahnim')
 					|| ($items->has('MoonPearl')
 						&& (($items->canLiftDarkRocks() && ($items->has('PegasusBoots') || $items->has('Flippers')))
-							|| ($items->has('Hammer') && $items->canLiftRocks())))
+							|| ($items->has('Hammer') && $items->canLiftRocks()))
+					   		|| $items->canAccessDarkWorldPortal())
 					|| ((($items->has('MagicMirror') && $items->canSpinSpeed())
 						|| ($items->has('MoonPearl') && ($items->has('MagicMirror') || $items->has('PegasusBoots'))))
 							&& $this->world->getRegion('West Death Mountain')->canEnter($locations, $items)));
