@@ -610,7 +610,7 @@ class ItemCollection extends Collection {
 
 	public function canAccessMaridiaPortal()
 	{
-		//TODO: Fix OWG logic to allow for a mirror clip
+		//@TODO: Fix OWG logic to allow for a mirror clip
 		switch($this->world->getSMLogic())
 		{
 			case 'Casual':
@@ -630,11 +630,12 @@ class ItemCollection extends Collection {
 							&& $this->has('RescueZelda')
 							&& $this->has('Gravity')
 							&& $this->has('Morph')
-							&& ($this->has('Flippers') 
+							&& (($this->has('Flippers') 
 							    	&& ($this->has('DefeatAgahnim')
 									|| ($this->has('Hammer') && $this->canLiftRocks())
 									|| $this->canLiftDarkRocks()))
-								|| $this->has('PegasusBoots');
+								|| $this->has('PegasusBoots')
+							   	|| $this->has('MagicMirror'));
 				}
 			case 'Tournament':
 				switch ($this->world->getLogic())
@@ -653,11 +654,12 @@ class ItemCollection extends Collection {
 							&& $this->has('RescueZelda')
 							&& ($this->canSpringBallJump() || $this->has('HiJump') || $this->has('Gravity'))
 							&& $this->has('Morph')
-							&& ($this->has('Flippers') 
+							&& (($this->has('Flippers') 
 							    	&& ($this->has('DefeatAgahnim')
 									|| ($this->has('Hammer') && $this->canLiftRocks())
 									|| $this->canLiftDarkRocks()))
-								|| $this->has('PegasusBoots');
+								|| $this->has('PegasusBoots')
+							   	|| $this->has('MagicMirror'));
 				}
 				return $this->has('MoonPearl')
 							&& $this->has('RescueZelda')
