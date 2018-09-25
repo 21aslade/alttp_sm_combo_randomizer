@@ -670,7 +670,7 @@ return [
 			],
 			'logics' => [
 				'NoMajorGlitches' => 'No Glitches',
-				//'OverworldGlitches' => 'Overworld Glitches',
+				'OverworldGlitches' => 'Overworld Glitches',
 				//'MajorGlitches' => 'Major Glitches',
 			],
 			'sm_logics' => [
