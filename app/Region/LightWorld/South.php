@@ -201,7 +201,7 @@ class South extends Region {
 			return $items->has('PegasusBoots')
 				|| ($items->has('Flippers') && $items->has('MagicMirror')
 					&& (($items->has('MoonPearl') && $this->world->getRegion('South Dark World')->canEnter($locations, $items))
-						|| $this->world->getRegion('North East Dark World')->canEnter($locations, $items)))
+						|| $this->world->getRegion('North East Dark World')->canEnter($locations, $items)));
 		});
 
 		return $this;

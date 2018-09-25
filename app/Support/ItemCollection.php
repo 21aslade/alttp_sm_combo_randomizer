@@ -603,7 +603,7 @@ class ItemCollection extends Collection {
 			case "NoMajorGlitches":
 				return $this->canFly() && $this->canLiftDarkRocks();
 			case "OverworldGlitches":
-				return ($this->canFly() && ($this->canLiftDarkRocks() || $this->has('PegasusBoots'))
+				return ($this->canFly() && ($this->canLiftDarkRocks() || $this->has('PegasusBoots')))
 					|| ($this->has('PegasusBoots') && $this->has('MoonPearl'));
 		}
 	}
